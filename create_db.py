@@ -11,13 +11,4 @@ class User(Base):
 
 engine = create_engine('mysql+pymysql://root:123456@10.0.3.4:30306/testdb')
 DBSession = sessionmaker(bind=engine)
-count = 0
-while(True):
-    session = DBSession()
-    new_user = User(id=String(count),name=String('james' + count))
-    session.add(new_user)
-    session.commit()
-    user = session.query(User).filter(User.id==String(count)).one()
-    print(user.name)
-    session.close()
-    count=count+1
+Base.metadata.create_all(engine)
