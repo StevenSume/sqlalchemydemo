@@ -19,15 +19,17 @@ def createTable():
     db.close()
 
 def insertData():
-    db = getConnect()
-    cursor = db.cursor()
-    data = ''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 50))
-    cursor.execute('insert into testtable values(%s)' % \
-                (data))
-    db.commit()
-    db.close()
+    try:
+        db = getConnect()
+        cursor = db.cursor()
+        data = ''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 5))
+        print('insert into testtable (mydata) values (\'' + data + '\')')
+        cursor.execute('insert into testtable (mydata) values (\'' + data + '\')')
+        db.commit()
+        db.close()
+    except Exception as e:
+        print("no problem")
 
 if __name__ == '__main__':
-    createTable()
     while(True):
         insertData()
